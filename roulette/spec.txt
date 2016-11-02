@@ -1,0 +1,6 @@
+Lage et spill som simulerer roulette.
+
+Spilleren kan satse penger på en gruppe tall (rød, 1-18, tre tall intill hver-
+andre).
+
+Hjulet kommer til å bli snurret rundt og noen kommer til å ta imot bets.
