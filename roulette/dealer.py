@@ -3,12 +3,12 @@
 
 #  Write code like comments don't exist
 
-from bet import Bet
-
 
 class BetHandling():
 
-    def __init__(self, minimum_table_bet):
+    def __init__(self, minimum_table_bet=None):
+        if minimum_table_bet is None:
+            raise NotImplementedError("Forgot minimum_table_bet")
         self.bets = {}
         self.minimum_table_bet = minimum_table_bet
 

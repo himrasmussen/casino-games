@@ -6,6 +6,9 @@
         # Straight forward 0 through 36
     # Odd numbers are red, even are blacknumbers = list(range(37))
 
+# TODO: Fix colors 
+
+
 numbers = list(range(37))
 colors = {"even": "black", "odd": "red"} # is this the best way?
 

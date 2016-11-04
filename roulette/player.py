@@ -17,7 +17,7 @@ class Player():
         raise NotImplementedError
 
     def place_money_bet(self):
-        def get_int():
+        def get_nonnegative_int():
             n = -1
             while n < 0:
                 try:
@@ -29,10 +29,10 @@ class Player():
             return n
 
         print("How much do you bet? ", end='')
-        self.money_bet = get_int()
+        self.money_bet = get_nonnegative_int()
         while self.money_bet > self.money:
             print("You don't have that much money.")
-            self.money_bet = get_int()
+            self.money_bet = get_nonnegative_int()
         return self.money_bet
 
 if __name__ == '__main__':
