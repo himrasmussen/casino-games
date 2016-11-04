@@ -9,7 +9,9 @@
 
 class Player():
 
-    def __init__(self, id, money):
+    def __init__(self, id=None, money=0):
+        if not id or not money:
+            raise NotImplementedError("Player missing id or money")
         self.id = id
         self.money = money
 
@@ -26,7 +28,7 @@ class Player():
                         print("Retry: ", end='')
                 except ValueError:
                     print("Retry: ", end='')
-            return n
+            return n #NOTE: Adapter?
 
         print("How much do you bet? ", end='')
         self.money_bet = get_nonnegative_int()

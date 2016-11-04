@@ -3,6 +3,7 @@
 
 #  Write code like comments don't exist
 
+#NOTE: Skal store bet være en del av å ta bet eller en bli kalt for seg selv?
 
 class BetHandling():
 
@@ -15,8 +16,8 @@ class BetHandling():
     def take_bet(self, player):
         raise NotImplementedError
 
-    def store_bet(self, player, bet_type, bet):
-        self.bets[player][bet_type] = bet
+    def store_money_bet(self, player, money_bet):
+        self.bets[player]['money'] = money_bet
 
     def take_money_bet(self, player):
         self.money_bet = player.place_money_bet()
@@ -24,7 +25,7 @@ class BetHandling():
             print("You have to bet at least {minimum_table_bet}."
                 .format(minimum_table_bet = self.minimum_table_bet))
             self.money_bet = player.place_money_bet()
-        self.store_bet(self, player, 'money', self.money_bet)
+        self.store_money_bet(self, player, self.money_bet)
 
 
 
@@ -49,7 +50,7 @@ class BetHandling():
 
 class Dealer():
 
-    def __init__(self, bet_handling, minimum_table_bet):
+    def __init__(self, bet_handling=None, minimum_table_bet):
         # self.bets = {}
         self.winners = []
         self.bet_handling = bet_handling(minimum_table_bet)

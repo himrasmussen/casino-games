@@ -8,9 +8,10 @@
 
 class Table():
 
-    def __init__(self, players, dealer):
+    def __init__(self, players, dealer, minimum_table_bet):
         self.players = players
-        self.dealer = dealer
+        self.dealer = dealer(minimum_table_bet)
+        self.minimum_table_bet = minimum_table_bet
 
     def print_players(self):
         print(", ".join(self.players))

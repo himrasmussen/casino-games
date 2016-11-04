@@ -7,7 +7,7 @@ from player import Player
 
 class RoulettePlayer(Player):
 
-    def place_bet_type(self):
+    def place_bet_name(self):
         print("What kind of bet do you want to place? ", end='')
         return input()
 
@@ -18,7 +18,6 @@ class RoulettePlayer(Player):
                         arr[idx] = int(arr[idx])
                     except ValueError:
                         print("Retry: ")
-
             def is_all_elements_int(arr):
                 for element in arr:
                     if type(arr) is not int:
@@ -31,3 +30,6 @@ class RoulettePlayer(Player):
             print("Retry: ", end='')
             self.number_bet = input().split()
         return make_int_list(self.number_bet)
+
+    def place_column_or_row_bet(self, name=None):
+        print
