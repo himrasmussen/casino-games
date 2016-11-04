@@ -1,0 +1,41 @@
+Casino
+
+General classes
+
+Table
+* list players  // typen spillere varier
+* Dealer dealer // typen dealer varierer
+* game objects  // dette varierer
+
+Dealer
+* list bets   // dette varier
+* take_bets() // dette varierer
+* save_bets() // dette varierer
+
+Player
+* int id
+* int money
+* place_bet()  // dette varierer
+
+
+Roulette Classes
+
+Roulette Table
+* Wheel wheel
+
+Croupier
+* dictionary bets
+* RouletteRoules roulette_rules
+* take_bets()
+	* take_bet_money()
+	* take_bet_type()
+	* take_bet_numbers()
+* store_bets()
+* check_for_win()
+* payout()
+
+Roulette Player
+* place_bet()
+	* place_bet_money()
+	* place_bet_type()
+	* place_bet_numbers()
