@@ -12,13 +12,13 @@ class RoulettePlayer(Player):
         return input()
 
     def place_roulette_number_bet(self):
-            def make_int_list(arr): # adapter here
+        def make_int_list(arr): # adapter here
                 for idx, entry in enumerate(arr):
                     try:
                         arr[idx] = int(arr[idx])
                     except ValueError:
                         print("Retry: ")
-            def is_all_elements_int(arr):
+        def is_all_elements_int(arr):
                 for element in arr:
                     if type(arr) is not int:
                         return False

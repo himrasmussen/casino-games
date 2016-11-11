@@ -16,7 +16,7 @@ class BetHandling():
     def take_bet(self, player):
         raise NotImplementedError
 
-    def store_money_bet(self, player, money_bet):
+    def store_money_bet(self, player_id, money_bet):
         self.bets[player]['money'] = money_bet
 
     def take_money_bet(self, player):
@@ -50,14 +50,24 @@ class BetHandling():
 
 class Dealer():
 
-    def __init__(self, bet_handling=None, minimum_table_bet):
+    def __init__(self, bet_handling=None, minimum_table_bet=None):
         # self.bets = {}
+        if not minimum_table_bet or not bet_handling:
+            raise NotImplementedError("Must have bethandling or minimum_table_bet")
         self.winners = []
-        self.bet_handling = bet_handling(minimum_table_bet)
+        # self.bet_handling = bet_handling(minimum_table_bet)
         self.minimum_table_bet = minimum_table_bet
 
-    def check_victory():
+    def check_victory(self, player):
         raise NotImplementedError
+
+    def check_players_for_victory(self, players):
+        for player in players:
+            self.winners = [player.id for player in players if self.check_victory(player)]
+
+    def payout(self, player):
+        player.money += self.bet_handling.bets[player]["money"] * \
+                        self.bet_handling.payout[self.bet_handling[player]["bet_name"]]
 
     def payout_winners(self, winners):
         for winner in winners:
@@ -70,4 +80,3 @@ class Dealer():
         pass
 
 if __name__ == '__main__':
-    pass

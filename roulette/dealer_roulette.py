@@ -3,11 +3,11 @@
 
 #  Write code like comments don't exist
 
-import webbrowser
 from pprint import pprint
 
 from dealer import BetHandling
-from player_roulette import RoulettePlayer
+from wheel import Wheel
+from random import choice
 
 class RouletteBetHandling(BetHandling):
 
@@ -15,7 +15,7 @@ class RouletteBetHandling(BetHandling):
         "single", "split", "street",
         "corner", "six line", "trio",
         "basket",
-        "low", "manque", "high", "passe",
+        "low", "high",
         "red", "black", "even", "odd",
         "dozen bet", "column bet", "snake bet"]
     bet_names_description = {
@@ -27,7 +27,7 @@ class RouletteBetHandling(BetHandling):
         "trio": "A three-number bet that involves at least one zero: 0-1-2 (either layout); 0-2-3 (single-zero only); 0-00-2 or 00-2-3 (double-zero only)",
         "basket": "Bet on 0-1-2-3",
 
-        "low", : "A bet that the number will be in the range 1-18",
+        "low": "A bet that the number will be in the range 1-18",
         "high": "A bet that the number will be in the range 19-36",
         "red": "A bet that the number will be red",
         "black": "A bet that the number will be black",
@@ -46,6 +46,23 @@ class RouletteBetHandling(BetHandling):
         "red", "black", "even", "odd",
         "dozen bet", "column bet", "snake bet"
         ]}}
+    payout = {
+        "singe": 35,
+        "split": 17,
+        "street": 11,
+        "corner": 8,
+        "six line": 5,
+        "trio": 11,
+        "basket": 6,
+        "low": 1,
+        "high": 1,
+        "red": 1,
+        "black": 1,
+        "even": 1,
+        "odd": 1,
+        "dozen bet": 2,
+        "column bet": 2,
+        "snake bet": 2}
     def take_roulette_bet_name(self, player):
         print("What name of bet do you want to place? ", end='')
         self.roulette_name_bet = player.place_roulette_name_bet()
@@ -106,7 +123,7 @@ class RouletteBetHandling(BetHandling):
             bet_validity_dict = {
                 "single": True,
                 "split": True if are_numbers_adjacent(bet_numbers) else False,
-                "corner" True if are_numbers_around_a_corner(bet_numbers) else False,
+                "corner": True if are_numbers_around_a_corner(bet_numbers) else False,
                 "street": True if are_3_numbers_consecutive_along_a_horizontal_line(bet_numbers) else False,
                 "six line": True if are_6_numbers_consecutive_along_two_horizontal_rows(bet_numbers) else False,
                 "basket": True if has_bet_0_and_either_1_2_or_3(bet_numbers) else False,
@@ -149,19 +166,27 @@ class RouletteBetHandling(BetHandling):
                 return self.get_which_column_or_row_bet(player)
 
         return self.get_correct_bet_take_function(player, bet_name)
-    def store_bet(self, money, bet_name, placed_bet):
-        self.bets[player]["money"] = money
-        self.bets[player]["bet_name"] = bet_name
-        self.bets[player]["placed_bet"] = placed_bet
+    def store_bet(self, player_id, money, bet_name, placed_bet):
+        # self.bets[player.id]["money"] = money
+        self.store_money_bet(player.id, money)
+        self.bets[player_id]["bet_name"] = bet_name
+        self.bets[player_id]["placed_bet"] = placed_bet
     def take_bet(self, player):
         self.bet_money = self.take_money_bet(player)
         self.bet_name = self.take_roulette_bet_name(player)
         self.placed_bet = self.take_roulette_number_or_column_or_row_bet(player, bet_name)
 
+
 class Croupier(Dealer):
-    roulette_bet_handling = RouletteBetHandling()
+    # self.bet_handling = RouletteBetHandling()
+
+    def spin_wheel(self):
+        self.wheel_result = choice(Wheel.pockets)
+
+    def check_victory(self, player):
+        return True if self.wheel_result in self.bet_handling[player]["placed_bet"] else False
 
 
-if __name__ == '__main__':
-    croupier = Croupier(minimum_table_bet=150)
-    player = RoulettePlayer(id=1, money=2000)
+# if __name__ == '__main__':
+#     croupier = Croupier(minimum_table_bet=150)
+#     player = RoulettePlayer(id=1, money=2000)
